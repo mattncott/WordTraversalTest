@@ -43,11 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\ApplicationInterface.cs" />
+    <Compile Include="Application\ConsoleApplication.cs" />
+    <Compile Include="Dictionary\DictionaryFile.cs" />
+    <Compile Include="Dictionary\DictionaryInterface.cs" />
+    <Compile Include="Processing\DictionaryProcessing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dictionary\words-english.txt" />
+    <Content Include="Notes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

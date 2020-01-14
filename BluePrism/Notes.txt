@@ -1,0 +1,16 @@
+﻿
+Use an application interface to allow for it to seamlessly change GUI
+
+Dictionary Interface to allow for database, file, JSON, etc
+
+We are ONLY interpreting 4 letter words. So we can remove EVERY word longer from the list straight away.
+
+// It will account for not alphabetical but could be slow with large lists
+List<string> Recursive(){
+	// Divide and conquer the list
+	For(List){
+		If step 1 find all words with 2 similarities
+		2 find all 3 similarities
+		until length of string - 1 similarities
+	}
+}
