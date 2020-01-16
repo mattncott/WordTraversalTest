@@ -52,10 +52,13 @@ namespace BluePrism.Application
                         Console.WriteLine(word);
                     }
                 }
-                // TODO DictionaryException
+                catch (System.IO.IOException e)
+                {
+                    Console.WriteLine("The word dictionary could not be found. Please try again later.");
+                }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine("An unknown error occurred. Please try again later");
                 }
 
                 Console.WriteLine("Please type 'exit' to leave the application or, press enter to go again.");

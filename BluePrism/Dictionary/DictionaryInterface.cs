@@ -12,7 +12,7 @@ namespace BluePrism.Dictionary
     interface DictionaryInterface
     {
         /// <summary>
-        /// Load the dictionary from a source specified in implementing class
+        /// Load the dictionary from a strict source specified in implementing class
         /// </summary>
         /// <returns>List of string values</returns>
         List<string> LoadFromSource();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BluePrism
 {
-    class Validation
+    public class Validation
     {
         /// <summary>
         /// Validate that words provided by the user are correct
@@ -17,14 +17,7 @@ namespace BluePrism
         public static Boolean ValidateWords(string StartWord, string EndWord)
         {
             // TODO check that words exist in Dictionary
-            if (StartWord.Length == EndWord.Length)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return (StartWord.Length == EndWord.Length);
         }
     }
 }

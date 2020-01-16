@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BluePrism.Dictionary
 {
-    class DictionaryFile : DictionaryInterface
+    public class DictionaryFile : DictionaryInterface
     {
         /// <summary>
         /// Read the contents of the Dictionary Text File and return as a List of String values
@@ -15,16 +15,12 @@ namespace BluePrism.Dictionary
         /// <returns>List<string></returns>
         public List<string> LoadFromSource()
         {
-            try
-            {
-                // Return the contents of the File in a list of string values
-                return new List<string>(File.ReadAllLines(@"../../Dictionary/words-english.txt"));
-            } 
-            catch (IOException)
-            {
-                // If the file doesn't exist, we can return an empty list
-                return new List<string>();
-            }
+            // Get current directory -- needed to find file for unit tests
+            string solutiondir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            
+            // Return the contents of the File in a list of string values
+            // Need to go up one directory for tests and working solution to pass
+            return new List<string>(File.ReadAllLines(solutiondir+"\\..\\BluePrism\\Dictionary\\words-english.txt"));
         }
     }
 }

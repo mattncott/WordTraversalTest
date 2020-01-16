@@ -14,3 +14,10 @@ List<string> Recursive(){
 		until length of string - 1 similarities
 	}
 }
+
+
+
+Problems arisen from unit testing:
+
+Letters out of order 
+Capital letters

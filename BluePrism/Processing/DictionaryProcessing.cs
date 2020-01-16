@@ -6,25 +6,28 @@ using System.Threading.Tasks;
 
 namespace BluePrism.Processing
 {
-    class DictionaryProcessing
+    public class DictionaryProcessing
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="StartWord">Word to start with</param>
-        /// <param name="EndWord">Word to end with</param>
-        /// <param name="Dictionary">Dictionary list of terms to sort through</param>
+        /// <param name="startWord">Word to start with</param>
+        /// <param name="endWord">Word to end with</param>
+        /// <param name="dictionary">Dictionary list of terms to sort through</param>
         /// <returns>List of strings</returns>
-        public static List<string> ProcessDictionary(string StartWord, string EndWord, List<string> Dictionary)
+        public static List<string> ProcessDictionary(string startWord, string endWord, List<string> dictionary)
         {
 
+            startWord = startWord.ToLower();
+            endWord = endWord.ToLower();
+
             // Process the words to determine which chars need switching
-            List<bool> steps = CalculateSteps(StartWord, EndWord);
+            List<bool> steps = CalculateSteps(startWord, endWord);
 
             // List of words that have been processed for character changes
             List<string> words = new List<string>();
 
-            words.Add(StartWord);
+            words.Add(startWord);
 
             int position = 0;
 
@@ -34,7 +37,7 @@ namespace BluePrism.Processing
                 // We only need to correct chars that are not already correct
                 if (!step)
                 {
-                    words.Add(ParseDictionary(words[words.Count-1], EndWord, Dictionary, position));
+                    words.Add(ParseDictionary(words[words.Count-1], endWord, dictionary, position));
                 }
                 position++;
             }
