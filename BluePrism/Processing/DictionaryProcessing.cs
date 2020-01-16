@@ -17,29 +17,19 @@ namespace BluePrism.Processing
         /// <returns>List of strings</returns>
         public static List<string> ProcessDictionary(string startWord, string endWord, List<string> dictionary)
         {
-
-            startWord = startWord.ToLower();
-            endWord = endWord.ToLower();
-
             // Process the words to determine which chars need switching
-            List<bool> steps = CalculateSteps(startWord, endWord);
+            int steps = CalculateSteps(startWord, endWord);
 
             // List of words that have been processed for character changes
             List<string> words = new List<string>();
 
             words.Add(startWord);
 
-            int position = 0;
-
             // Loop through each step
-            foreach (bool step in steps)
+            for (int i=steps; i>0; i--)
             {
                 // We only need to correct chars that are not already correct
-                if (!step)
-                {
-                    words.Add(ParseDictionary(words[words.Count-1], endWord, dictionary, position));
-                }
-                position++;
+                words.Add(ParseDictionary(words[words.Count-1], endWord, dictionary, i));
             }
 
             return words;
@@ -51,70 +41,56 @@ namespace BluePrism.Processing
         /// <param name="startWord"></param>
         /// <param name="endWord"></param>
         /// <returns></returns>
-        private static List<bool> CalculateSteps(string StartWord, string EndWord)
+        private static int CalculateSteps(string startWord, string endWord)
         {
-            char[] StartWordLetters = StartWord.ToCharArray();
-            char[] EndWordLetters = EndWord.ToCharArray();
+            // Intersect the 2 words and create a list of matching chars
+            List<Char> intersect = startWord.Intersect(endWord).ToList();
 
-            List<bool> Steps = new List<bool>();
+            // Convert to String and calculate length for calculation
+            int countOfIntersection = (new String(endWord.Where(c => intersect.Contains(c)).ToArray())).Length;
 
-            for (int i = 0; i < StartWordLetters.Length; i++)
-            {
-                Steps.Add(StartWordLetters[i] == EndWordLetters[i]);
-            }
-
-            return Steps;
+            // Assume that startWord and endWord are the same length
+            return startWord.Length - countOfIntersection;
         }
 
         /// <summary>
         /// Parse the dictionary file for words that can be used on the Char switch
         /// </summary>
-        /// <param name="StartWord">Word we are switching out</param>
-        /// <param name="EndWord">The end goal word</param>
-        /// <param name="Dictionary">Dictionary File</param>
-        /// <param name="Position">Position of char that we are currently switching</param>
+        /// <param name="startWord">Word we are switching out</param>
+        /// <param name="endWord">The end goal word</param>
+        /// <param name="dictionary">Dictionary File</param>
+        /// <param name="lettersLeft">How many letters we have left to change</param>
         /// <returns></returns>
-        private static string ParseDictionary(string StartWord, string EndWord, List<string> Dictionary, int Position)
+        private static string ParseDictionary(string startWord, string endWord, List<string> dictionary, int lettersLeft)
         {
-            char[] startWordLetters = StartWord.ToCharArray();
-            char[] endWordLetters = EndWord.ToCharArray();
-            foreach (var word in Dictionary)
+            char[] startWordChars = startWord.ToLower().ToCharArray(); // Convert strings to chars
+            char[] endWordChars = endWord.ToLower().ToCharArray();
+            foreach (var word in dictionary)
             {
-                // Word is the correct length. There is no point checking words of incorrect length
-                if ((word.Length == StartWord.Length))
+                char[] wordChars = word.ToLower().ToCharArray(); // Convert string to char
+                int lettersChanged = 0; // Start with no letters changed
+                int lettersNeededToChange = endWord.Length; // Start assuming we need to change ever letter
+
+                // We only care about words of equal length
+                if (wordChars.Length == startWordChars.Length)
                 {
-
-                    // Convert the word to a char array for processing
-                    char[] Letters = word.ToCharArray();
-
-                    // We are looking for errors, assume this is the word we want
-                    bool adding = true;
-
-                    // Loop through all previously checked chars up to the new one we want checking they are correct
-                    for (int i = 0; i <= Position; i++)
+                    for (int i = 0; i < startWordChars.Length; i++)
                     {
-                        if (endWordLetters[i] != word.ToCharArray()[i])
+                        // If this letter has been changed increment the chage variable
+                        if (startWordChars[i] != wordChars[i])
                         {
-                            adding = false;
-                            break;
+                            lettersChanged++;
+                        }
+
+                        // If this letter exists in the final word we are looking for
+                        if (endWordChars[i] == wordChars[i])
+                        {
+                            lettersNeededToChange--;
                         }
                     }
 
-                    // If they are, loop through existing unchecked chars ensuring they are still correct
-                    if (adding)
-                    {
-                        for (int i = Position+1; i < EndWord.Length; i++)
-                        {
-                            if (startWordLetters[i] != word.ToCharArray()[i])
-                            {
-                                adding = false;
-                                break;
-                            }
-                        }
-                    }
-
-                    // The word is correct, we can just return now. There is no point checking further
-                    if (adding)
+                    // We ONLY want to make 1 change at a time and we want this change to exist in the final word
+                    if ((lettersChanged == 1) && (lettersNeededToChange == (lettersLeft-1)))
                     {
                         return word;
                     }

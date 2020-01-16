@@ -16,23 +16,23 @@ namespace BluePrism.Application
             string exit = "";
             do
             {
-                string StartWord;
-                string EndWord;
+                string startWord;
+                string endWord;
                 bool valid = false;
 
                 // We're going to continously loop through word selection until we have 2 valid words
                 do
                 {
                     Console.Write("Please enter your start word: ");
-                    StartWord = Console.ReadLine().ToLower();
-                    Console.WriteLine("You chose: {0}", StartWord);
+                    startWord = Console.ReadLine().ToLower();
+                    Console.WriteLine("You chose: {0}", startWord);
 
                     Console.Write("Please enter your end word: ");
-                    EndWord = Console.ReadLine().ToLower();
-                    Console.WriteLine("You chose: {0}", EndWord);
+                    endWord = Console.ReadLine().ToLower();
+                    Console.WriteLine("You chose: {0}", endWord);
 
                     // Perform validation on the words
-                    valid = Validation.ValidateWords(StartWord, EndWord);
+                    valid = Validation.ValidateWords(startWord, endWord);
                     if (!valid)
                     {
                         Console.WriteLine("Please make sure that both words are of equal length.");
@@ -42,21 +42,21 @@ namespace BluePrism.Application
 
                 try
                 {
-                    DictionaryFile DictionaryFile = new DictionaryFile();
-                    List<string> Dictionary = DictionaryFile.LoadFromSource();
+                    DictionaryFile dictionaryFile = new DictionaryFile();
+                    List<string> dictionaryList = dictionaryFile.LoadFromSource();
 
-                    Dictionary = DictionaryProcessing.ProcessDictionary(StartWord, EndWord, Dictionary);
+                    dictionaryList = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList);
 
-                    foreach (string word in Dictionary)
+                    foreach (string word in dictionaryList)
                     {
                         Console.WriteLine(word);
                     }
                 }
-                catch (System.IO.IOException e)
+                catch (System.IO.IOException)
                 {
                     Console.WriteLine("The word dictionary could not be found. Please try again later.");
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.WriteLine("An unknown error occurred. Please try again later");
                 }
