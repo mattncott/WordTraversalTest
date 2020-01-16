@@ -11,6 +11,9 @@ namespace BluePrism.Application
 {
     class ConsoleApplication: ApplicationInterface
     {
+        /// <summary>
+        /// Start point for the Console Application
+        /// </summary>
         public void Start()
         {
             string exit = "";
@@ -37,6 +40,7 @@ namespace BluePrism.Application
 
                 } while (!valid);
 
+                // We have required input from the user, start processing
                 try
                 {
                     DictionaryFile dictionaryFile = new DictionaryFile();
@@ -49,6 +53,7 @@ namespace BluePrism.Application
                         Console.WriteLine(word);
                     }
                 }
+                // Either the dictionary failed to load or the results
                 catch (System.IO.IOException)
                 {
                     Console.WriteLine("The word dictionary could not be found. Please try again later.");
@@ -58,6 +63,7 @@ namespace BluePrism.Application
                     Console.WriteLine("An unknown error occurred. Please try again later");
                 }
 
+                // Does the user wish to go again or leave?
                 Console.WriteLine("Please type 'exit' to leave the application or, press enter to go again.");
                 exit = Console.ReadLine().ToLower();
 

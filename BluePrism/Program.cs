@@ -13,6 +13,7 @@ namespace BluePrism
     {
         static void Main(string[] args)
         {
+            // Start the console application interface
             ConsoleApplication app = new ConsoleApplication();
             app.Start();
         }
