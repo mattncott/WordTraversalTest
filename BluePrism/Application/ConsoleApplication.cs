@@ -25,11 +25,8 @@ namespace BluePrism.Application
                 {
                     Console.Write("Please enter your start word: ");
                     startWord = Console.ReadLine().ToLower();
-                    Console.WriteLine("You chose: {0}", startWord);
-
                     Console.Write("Please enter your end word: ");
                     endWord = Console.ReadLine().ToLower();
-                    Console.WriteLine("You chose: {0}", endWord);
 
                     // Perform validation on the words
                     valid = Validation.ValidateWords(startWord, endWord);
@@ -45,7 +42,7 @@ namespace BluePrism.Application
                     DictionaryFile dictionaryFile = new DictionaryFile();
                     List<string> dictionaryList = dictionaryFile.LoadFromSource();
 
-                    dictionaryList = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList);
+                    dictionaryList = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList, "results.txt");
 
                     foreach (string word in dictionaryList)
                     {

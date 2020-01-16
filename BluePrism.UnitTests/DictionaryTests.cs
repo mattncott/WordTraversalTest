@@ -38,7 +38,7 @@ namespace BluePrism.UnitTests
 
             // Act
             List<string> dictionaryList = dictionary.LoadFromSource();
-            List<string> dictionaryResult = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList);
+            List<string> dictionaryResult = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList, "results.txt");
 
             // Assert
             Assert.IsNotNull(dictionaryResult);
@@ -62,14 +62,14 @@ namespace BluePrism.UnitTests
             dictionaryList.Add("Spot");
             dictionaryList.Add("Span");
 
-            List<string> dictionaryResult = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList);
+            List<string> dictionaryResult = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList, "results.txt");
 
             // Assert
             Assert.IsNotNull(dictionaryResult);
         }
 
         /// <summary>
-        /// Requirements state that a non-alpabetical dictionary could be provided. Randomise the given dictionary and test
+        /// Requirements state that a non-alpabetical dictionary could be provided. Randomise the given dictionary and test the processing solutions works still
         /// </summary>
         [TestMethod]
         public void Dictionary_DictionaryFindSolutionFromRandomList_ExpectedBehaviour()
@@ -81,7 +81,7 @@ namespace BluePrism.UnitTests
 
             // Act
             List<string> dictionaryList = Shuffle(dictionary.LoadFromSource());
-            List<string> dictionaryResult = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList);
+            List<string> dictionaryResult = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList, "results.txt");
 
             // Assert
             Assert.IsNotNull(dictionaryResult);

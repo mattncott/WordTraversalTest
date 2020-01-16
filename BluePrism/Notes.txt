@@ -1,5 +1,5 @@
 ﻿
-Use an application interface to allow for it to seamlessly change GUI
+Use an application interface to allow for it to seamlessly change GUI further down the line
 
 Dictionary Interface to allow for database, file, JSON, etc
 

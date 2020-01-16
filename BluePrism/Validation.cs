@@ -16,7 +16,6 @@ namespace BluePrism
         /// <returns>True if words are valid</returns>
         public static Boolean ValidateWords(string StartWord, string EndWord)
         {
-            // TODO check that words exist in Dictionary
             return (StartWord.Length == EndWord.Length);
         }
     }

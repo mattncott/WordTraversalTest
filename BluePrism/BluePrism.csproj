@@ -54,11 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dictionary\words-english.txt" />
     <Content Include="Notes.txt" />
+    <Content Include="results.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
