@@ -38,7 +38,7 @@ namespace BluePrism.UnitTests
 
             // Act
             List<string> dictionaryList = dictionary.LoadFromSource();
-            List<string> dictionaryResult = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList, "results.txt");
+            List<string> dictionaryResult = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList);
 
             // Assert
             Assert.IsNotNull(dictionaryResult);
@@ -62,7 +62,7 @@ namespace BluePrism.UnitTests
             dictionaryList.Add("Spot");
             dictionaryList.Add("Span");
 
-            List<string> dictionaryResult = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList, "results.txt");
+            List<string> dictionaryResult = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList);
 
             // Assert
             Assert.IsNotNull(dictionaryResult);
@@ -81,7 +81,7 @@ namespace BluePrism.UnitTests
 
             // Act
             List<string> dictionaryList = Shuffle(dictionary.LoadFromSource());
-            List<string> dictionaryResult = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList, "results.txt");
+            List<string> dictionaryResult = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList);
 
             // Assert
             Assert.IsNotNull(dictionaryResult);

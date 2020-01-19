@@ -22,5 +22,23 @@ namespace BluePrism.Dictionary
             // Need to go up one directory for tests and working solution to pass
             return new List<string>(File.ReadAllLines(solutiondir+"\\..\\BluePrism\\Dictionary\\words-english.txt"));
         }
+
+        /// <summary>
+        /// Function to store the result to a file specified
+        /// </summary>
+        /// <param name="words">List of words to save to the file</param>
+        public void SaveResult(List<string> words)
+        {
+            // Get current directory -- needed to find file for unit tests
+            string solutiondir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            TextWriter tw = new StreamWriter(solutiondir + "\\..\\BluePrism\\results.txt");
+
+            foreach (String word in words)
+            {
+                tw.WriteLine(word);
+            }
+
+            tw.Close();
+        }
     }
 }

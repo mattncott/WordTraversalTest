@@ -16,5 +16,10 @@ namespace BluePrism.Dictionary
         /// </summary>
         /// <returns>List of string values</returns>
         List<string> LoadFromSource();
+
+        /// <summary>
+        /// Load the result from the dictionary to a source specified in the implementing class
+        /// </summary>
+        void SaveResult(List<string> words);
     }
 }

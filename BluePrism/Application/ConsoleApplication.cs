@@ -46,12 +46,15 @@ namespace BluePrism.Application
                     DictionaryFile dictionaryFile = new DictionaryFile();
                     List<string> dictionaryList = dictionaryFile.LoadFromSource();
 
-                    dictionaryList = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList, "results.txt");
+                    dictionaryList = DictionaryProcessing.ProcessDictionary(startWord, endWord, dictionaryList);
 
                     foreach (string word in dictionaryList)
                     {
                         Console.WriteLine(word);
                     }
+
+                    dictionaryFile.SaveResult(dictionaryList);
+                    Console.WriteLine("Your results have also been saved to a txt file.");
                 }
                 // Either the dictionary failed to load or the results
                 catch (System.IO.IOException)

@@ -15,9 +15,8 @@ namespace BluePrism.Processing
         /// <param name="startWord">Word to start with</param>
         /// <param name="endWord">Word to end with</param>
         /// <param name="dictionary">Dictionary list of terms to sort through</param>
-        /// <param name="fileOutput">File location on where to save the results to</param>
         /// <returns>List of strings</returns>
-        public static List<string> ProcessDictionary(string startWord, string endWord, List<string> dictionary, string fileOutput)
+        public static List<string> ProcessDictionary(string startWord, string endWord, List<string> dictionary)
         {
             // Process the words to determine which chars need switching
             int steps = CalculateSteps(startWord, endWord);
@@ -34,28 +33,7 @@ namespace BluePrism.Processing
                 words.Add(ParseDictionary(words[words.Count-1], endWord, dictionary, i));
             }
 
-            StoreResult(fileOutput, words);
-
             return words;
-        }
-
-        /// <summary>
-        /// Function to store the result to a file specified
-        /// </summary>
-        /// <param name="file">Txt file location</param>
-        /// <param name="words">List of words to save to the file</param>
-        private static void StoreResult(string file, List<string> words)
-        {
-            // Get current directory -- needed to find file for unit tests
-            string solutiondir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-            TextWriter tw = new StreamWriter(solutiondir+ "\\..\\BluePrism\\" + file);
-
-            foreach (String word in words)
-            {
-                tw.WriteLine(word);
-            }
-
-            tw.Close();
         }
 
         /// <summary>
